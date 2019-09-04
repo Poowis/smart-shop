@@ -30,8 +30,8 @@ public class App {
 		ordered = new ProductCollection("orderded");
 
 		stock.add(new Product(DollFactory.create(), "in stock", 499.00));
-		stock.add(new Product(DollFactory.create(), "in stock", 499.00));
-		stock.add(new Product(DollFactory.create(), "in stock", 499.00));
+		stock.add(new Product(DollFactory.create("racecar", "vehicle", "car", "red"), "in stock", 299.00));
+		stock.add(new Product(DollFactory.create("airplane", "vehicle", "plane", "white"), "in stock", 399.00));
 	}
 
 	@GetMapping(value = "/")
