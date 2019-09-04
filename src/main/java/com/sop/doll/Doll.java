@@ -1,22 +1,20 @@
 package com.sop.doll;
 
 public class Doll {
-	
+
 	private int id;
 	private String name;
 	private String category;
 	private String subCategory;
-	
-	public Doll(int id, String name, String category, String subCategory) {
+	private String color;
+
+	public Doll(int id, String name, String category, String subCategory, String color) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.category = category;
 		this.subCategory = subCategory;
-	}
-
-	public int getId() {
-		return id;
+		this.color = color;
 	}
 
 	public String getName() {
@@ -27,7 +25,6 @@ public class Doll {
 		this.name = name;
 	}
 
-	
 	public String getCategory() {
 		return category;
 	}
@@ -43,6 +40,13 @@ public class Doll {
 	public void setSubCategory(String subCategory) {
 		this.subCategory = subCategory;
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
 }

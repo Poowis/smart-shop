@@ -1,23 +1,24 @@
 package com.sop.smartShop;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
-import com.sop.doll.DollCollection;
 import com.sop.doll.DollFactory;
-import com.sop.doll.Doll;
-
+import com.sop.product.Product;
+import com.sop.product.ProductCollection;
 
 @SpringBootApplication
 @RestController
 @EnableAutoConfiguration
 public class App {
 
-	DollCollection stock;
+	ProductCollection stock;
+	ProductCollection ordered;
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
@@ -25,39 +26,34 @@ public class App {
 
 	public App() {
 		super();
-		stock = new DollCollection();
-		stock.add(DollFactory.create());
-		stock.add(DollFactory.create());
-	}
+		stock = new ProductCollection("product");
+		ordered = new ProductCollection("orderded");
 
-	@RequestMapping(value = "rm/{text}", method = RequestMethod.GET)
-	public String rmg(@PathVariable("text") String text) {
-		return String.format("{\"message\":\"rmg %s\"}", text);
-
-	}
-
-	@RequestMapping(value = "rm/{text}", method = RequestMethod.POST)
-	public String rmp(@PathVariable("text") String text) {
-		return String.format("{\"message\":\"rmp %s\"}", text);
-
-	}
-
-	@GetMapping(value = "g/{text}")
-	public String g(@PathVariable("text") String text) {
-		return String.format("{\"message\":\"g %s\"}", text);
-
+		stock.add(new Product(DollFactory.create(), "in stock", 499.00));
+		stock.add(new Product(DollFactory.create(), "in stock", 499.00));
+		stock.add(new Product(DollFactory.create(), "in stock", 499.00));
 	}
 
 	@GetMapping(value = "/")
-	public List<Doll> list() {
+	public ArrayList<HashMap<String, Object>> list() {
 		return stock.getList();
-
 	}
-	
-	@PostMapping(value = "/buy")
-	public void buy(@RequestParam("id") int id) {
-		System.out.print(id);
-		stock.removeById(id);
+
+	@GetMapping(value = "/orderedlist")
+	public ArrayList<HashMap<String, Object>> orderedList() {
+		return ordered.getList();
+	}
+
+	@PostMapping(value = "/order")
+	public String order(@RequestParam("id") int id) {
+		Product temp = stock.pop(id);
+		if (temp != null) {
+			temp.setStatus("purchased");
+			ordered.add(temp);
+			return "Your order has been completed. check your order at /orderedList";
+		} else {
+			return "your order product is not exist";
+		}
 
 	}
 }
