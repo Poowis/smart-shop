@@ -1,6 +1,8 @@
 package com.sop.product;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
 	private Object product;
 	private String status;

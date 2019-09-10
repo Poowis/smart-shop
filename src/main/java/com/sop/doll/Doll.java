@@ -1,6 +1,8 @@
 package com.sop.doll;
 
-public class Doll {
+import java.io.Serializable;
+
+public class Doll implements Serializable {
 
 	private int id;
 	private String name;

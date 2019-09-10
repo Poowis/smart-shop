@@ -1,9 +1,10 @@
 package com.sop.product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProductCollection {
+public class ProductCollection implements Serializable {
 
 	private int currentId = 0;
 
@@ -23,6 +24,10 @@ public class ProductCollection {
 		list.add(temp);
 	}
 
+	public void setList(ArrayList<HashMap<String, Object>> list) {
+		this.list = list;
+	}
+
 	private int getIndex(int id) {
 		for (int i = 0; i < list.size(); i++) {
 			if ((int) list.get(i).get(name + "Id") == id) {
@@ -40,7 +45,7 @@ public class ProductCollection {
 		return null;
 	}
 
-	public Product pop(int id) {
+	public Product remove(int id) {
 		int index = getIndex(id);
 		if (index > -1) {
 			return (Product) list.remove(index).get("product");
