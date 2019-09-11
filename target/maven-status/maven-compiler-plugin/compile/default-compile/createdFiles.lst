@@ -1,5 +1,7 @@
-com\sop\smartShop\App.class
 com\sop\doll\DollFactory.class
+com\sop\doll\DollCollection.class
 com\sop\doll\Doll.class
 com\sop\product\ProductCollection.class
+com\sop\doll\DollCollection$1.class
+com\sop\smartShop\App.class
 com\sop\product\Product.class
